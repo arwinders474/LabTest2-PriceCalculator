@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<center><b><h2><p> Bike Configuration Portal</h2></b></p>  <!-- Paragraph Tag with Bold, center and H2 for heading -->
+
+	<form id="bikeform" autocomplete="off">
+		<label>
+		<input id="metallic" type="checkbox" value="100" data-itemname="Metallic Colour">  <!-- Check Box for configuration selection -->
+		Metallic Colour: $100
+		</label></br>
+		<b><p> Select the colour for your bike</p></b>
+		<label>
+		<input id="IBlack" type="radio" name="color" value="" data-itemname="Intence Black"> <!-- Radio button for color selection only 1 of the colours can be selected at a time -->
+		Intence Black
+		</label>
+		<label>
+		<input id="Ssilver" type="radio" name="color" value="" data-itemname="Silver">
+		Silver
+		</label>
+
+		<label>
+			<input id="BRed" type="radio" name="color" value="" data-itemname="Blood Red">
+			Blood Red
+		</label></br></br>
+		<label>
+			<input id="abs" type="checkbox" value="500" data-itemname="ABS">
+			ABS: $500
+		</label></br></br>
+			<input id="lguard" type="checkbox" value="100" data-itemname="LGuard">
+			Leg Guard: $100
+		</label></br>
+	</form>
+	<div>
+		Configuration Selected:
+		<div id="configuration"></div>
+		Total Price: <span id="price"></span>
+	</div></center>
+<script>
+	var price = 8000;
+	document.getElementById('price').innerHTML = price;
+	var options = document.getElementById('bikeform').querySelectorAll('input');
+	for(var i=0; i<options.length; i++){
+	options[i].onclick = handleOption;
+	}
+function handleOption(){     <!-- Function to check for the selected option -->
+	var confPrice = Number(this.value);
+	if(this.checked){
+	price += confPrice;
+	}
+	else{
+	price -= confPrice;
+	}
+	showconfiguration();
+	document.getElementById('price').innerHTML = price;
+	}
+function showconfiguration(){    <!-- Function to display the selected configuration -->
+	var listconfig = [];
+	var checkedItems =
+	document.getElementById('bikeform').querySelectorAll('input:checked');
+	for(var i=0; i<checkedItems.length; i++){
+	var itemname = checkedItems[i].getAttribute('data-itemname');
+	listconfig.push(itemname);
+	}
+	document.getElementById('configuration').innerHTML = listconfig.join('<br>');
+	}
+</script>
+
+</body>
+</html>
